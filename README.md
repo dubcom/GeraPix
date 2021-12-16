@@ -1,11 +1,11 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-deploy in [vercel](gerapix.vercel.app)
+
+Deploy in [vercel](https://gerapix.vercel.app/)
 
 
 
 ## Available Scripts
-
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 In the project directory, you can run:
 
 ### `yarn start`
