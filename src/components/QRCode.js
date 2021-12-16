@@ -117,7 +117,12 @@ function handToast () {
       </Card>
       <Card.Footer className="shadow text-center bg-dark text-white rounded">
         <h4 className="text-center mb-4">LER QRCode</h4>
-        <QRCode value={payload} size={280} className="text-center bg-secondary rounded" />
+        <div>
+          <QRCode value={payload} 
+          size={280} 
+          className="text-center bg-secondary rounded" />
+        </div>
+        
         <div>
           <small> Parar: {name}</small>
         </div>
