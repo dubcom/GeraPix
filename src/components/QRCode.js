@@ -3,6 +3,7 @@ import { Card, Button, Alert, Toast } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css"
+import UINumber from "./UINumber";
 
 
 
@@ -78,6 +79,7 @@ export default function GenerationQRCode() {
     city.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     textId.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     valorPix
+    // valorPix.replace(/(\d)(?=(\d{2})+(?!\d))/g, "$1.")
   );
   const payload = pix.getPayload();
   //logout incio 
@@ -98,6 +100,7 @@ function handToast () {
   }, 3000);
   navigator.clipboard.writeText(payload)
 }
+const formatter = new Intl.NumberFormat()
   return (
     <>
       <Card className="text-light shadow  bg-secondary rounded mb-2">
@@ -125,8 +128,11 @@ function handToast () {
         <div>
           <small> Parar: {name}</small>
         </div>
+        {formatter.format(valorPix)}
         <div>
-          <small>Valor: {valorPix}</small>
+          
+          <small>Valor: R${valorPix}</small>
+          
         </div>
         <Button className="bi bi-clipboard-check badge mr-08 Dark text-white" onClick={handToast}> COPIAR
         </Button>
