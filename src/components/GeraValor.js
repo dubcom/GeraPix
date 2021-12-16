@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Form, Card, Button, Alert} from "react-bootstrap"
+import { Form, Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 
@@ -40,15 +40,15 @@ export default function GerarValor() {
   async function handCreatPix(event) {
     event.preventDefault()
 
-    if (newPix.trim() === '') {
-      return
-    }
-    if (newTextId.trim() === '') {
-      return
-    }
-    if (newMenseger.trim() === '') {
-      return
-    }
+    // if (newPix.trim() === '') {
+    //   return
+    // }
+    // if (newTextId.trim() === '') {
+    //   return
+    // }
+    // if (newMenseger.trim() === '') {
+    //   return
+    // }
 
     const firebaseClient = {
       valorPix: newPix,
@@ -82,7 +82,7 @@ export default function GerarValor() {
           <Form>
             <Form.Group className="mb-4 mt-4" id="chave">
               <Form.Label className="mb-0">Valor da conta</Form.Label>
-              <Form.Control className="form-control" name="newPix" required placeholder="R$ 0.00"
+              <Form.Control className="form-control" type="number" name="newPix" required placeholder="R$ 0.00"
                 onChange={(event) => setPix(event.target.value)} />
               <small className="form-text text-muted">R$ 0.00 Digite o valor do PIX </small>
             </Form.Group>
