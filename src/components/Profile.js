@@ -8,24 +8,14 @@ import firebase from 'firebase';
 
 import logo from '../image/logo.png';
 
-
-
 export default function Profile() {
-
   const [error, setError] = useState('');
   const [chave, setChave] = useState('');
   const [city, setCity] = useState('');
   const [name, setName] = useState('');
-
   const { logout } = useAuth();
   const history = useHistory();
-
   const user = firebase.auth().currentUser;
-  // verficar se o usuario esta logado e se ele tem uma chave
-
-  // fim do codigo
-
-
   //logout incio 
   async function handleLogout() {
     setError("Algo deu errado")
@@ -36,8 +26,6 @@ export default function Profile() {
       setError("Failed to log out")
     }
   }
-  //Logout fim 
-
   // Recuperara dados do realtime database 
   const chaveRef = firebase.database().ref();
 
@@ -50,41 +38,25 @@ export default function Profile() {
       dataChave.push(id, dataRes);
     };
     // ver dados do realtime database redirecionar para a pagina de valor
-
   if (chaveRes.val() === null) {
     history.push("/Creatkey")
   } else {
     history.push("/GerarValor")
   }
     // Fim do codigo redirecionamento
-
     const resChave = Object.entries(chaveRes.val() ?? {}).map(([key, value]) => {
       return {
         'chave': value.chave,
         'city': value.city.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
         'name': value.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-        
       }
-  
     }
-   
-    
     );
     setChave(resChave[0].chave);
     setCity(resChave[0].city); 
     setName(resChave[0].name);
-   
-
   };
   GetData();
-  // fim de recuperar data
-
-  function removerAcentos(s) {
-    return s.normalize('NFD');
-  }
-  
-  console.log(removerAcentos(name).replace(/[\u0300-\u036f]/g, ''));
-
  
   return (
     <>
