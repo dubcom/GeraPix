@@ -119,7 +119,10 @@ function handToast () {
         <h4 className="text-center mb-4">LER QRCode</h4>
         <div className="text-center img-fluid">
           <QRCode value={payload} 
-          size={280} className="text-center img-fluid"/>
+          size={280} 
+          level={"H"}
+          includeMargin={true}
+          className="text-center img-fluid"/>
         </div>
         
         <div>
