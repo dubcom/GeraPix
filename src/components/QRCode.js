@@ -100,7 +100,7 @@ function handToast () {
 }
   return (
     <>
-      <Card className="text-light shadow  bg-secondary rounded mb-2">
+      <Card className="text-light shadow  text-center bg-secondary rounded mb-2">
         <div className="pl-3 pr-3 row justify-content-between">
           <Link className="badge badge-secondary" to="/UpData">EDITAR CHAVE</Link>
           <Link to="/GerarValor" className="badge badge-secondary" >
@@ -111,12 +111,19 @@ function handToast () {
           </Button>
         </div>
         <Card.Body>
-          <img src={logo} alt="Gera pix" className="img-fluid " />
+        <img src={logo} alt="Gera pix" width="200"/>
           {error && <Alert variant="danger">{error}</Alert>}
+          <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide top-center className=" top-center text-white bg-success">
+          <Toast.Header className="bg-success d-inline-block m-1">
+          <img src={logo} alt="Gera pix" width="100"/>
+            <strong className="me-auto text-white bg-success">   COPIADO     </strong>
+          </Toast.Header>
+          <Toast.Body>COPIADO COM SUCESSO!</Toast.Body>
+        </Toast>
         </Card.Body>
       </Card>
       <Card.Footer className="shadow text-center bg-dark text-white rounded">
-        <h4 className="text-center mb-4">LER QRCode</h4>
+        <h6 className="text-center">LER QRCode</h6>
         <div className="text-center img-fluid">
           <QRCode value={payload} 
           size={280} 
@@ -133,12 +140,7 @@ function handToast () {
         </div>
         <Button className="bi bi-clipboard-check badge mr-08 Dark text-white" onClick={handToast}> COPIAR
         </Button>
-        <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide top-center className=" top-center text-white bg-success">
-          <Toast.Header className="bg-success d-inline-block m-1">
-            <strong className="me-auto text-white bg-success bi bi-clipboard-check">COPIADO</strong>
-          </Toast.Header>
-          <Toast.Body>COPIADO COM SUCESSO!</Toast.Body>
-        </Toast>
+        
       </Card.Footer>
 
     </>
