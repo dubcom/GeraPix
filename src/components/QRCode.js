@@ -3,7 +3,6 @@ import { Card, Button, Alert, Toast } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css"
-import UINumber from "./UINumber";
 
 
 
@@ -79,7 +78,6 @@ export default function GenerationQRCode() {
     city.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     textId.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     valorPix
-    // valorPix.replace(/(\d)(?=(\d{2})+(?!\d))/g, "$1.")
   );
   const payload = pix.getPayload();
   //logout incio 
@@ -92,18 +90,17 @@ export default function GenerationQRCode() {
       setError("Failed to log out")
     }
   }
-// Toast show 
-function handToast () {
-  setShow(true);
-  setTimeout(() => {
-    setShow(false);
-  }, 3000);
-  navigator.clipboard.writeText(payload)
-}
-const formatter = new Intl.NumberFormat()
+  // Toast show 
+  function handToast() {
+    setShow(true);
+    setTimeout(() => {
+      setShow(false);
+    }, 3000);
+    navigator.clipboard.writeText(payload)
+  }
   return (
     <>
-      <Card className="text-light shadow  bg-secondary rounded mb-2">
+      <Card className="text-light shadow text-center bg-secondary rounded mb-2">
         <div className="pl-3 pr-3 row justify-content-between">
           <Link className="badge badge-secondary" to="/UpData">EDITAR CHAVE</Link>
           <Link to="/GerarValor" className="badge badge-secondary" >
@@ -114,34 +111,39 @@ const formatter = new Intl.NumberFormat()
           </Button>
         </div>
         <Card.Body>
-          <img src={logo} alt="Gera pix" className="img-fluid " />
+          <img src={logo} alt="Gera pix" width="200px" />
+          <Toast onClose={() => setShow(false)}
+            show={show} d
+            elay={3000}
+            autohide top-center className=" top-center text-white bg-success">
+            <Toast.Header className="bg-success d-inline-block m-1">
+              <img src={logo} alt="Gera pix" className="img-fluid bi bi-clipboard-check" width="100px" />
+
+            </Toast.Header>
+            <Toast.Body>COPIADO COM SUCESSO!</Toast.Body>
+          </Toast>
           {error && <Alert variant="danger">{error}</Alert>}
         </Card.Body>
       </Card>
       <Card.Footer className="shadow text-center bg-dark text-white rounded">
-        <h4 className="text-center mb-4">LER QRCode</h4>
+        <h6 className="text-center">LER QR-CODE</h6>
         <div className="text-center img-fluid">
-          <QRCode value={payload} 
-          size={280} className="text-center img-fluid"/>
+          <QRCode value={payload}
+            size={280}
+            level={"H"}
+            includeMargin={true}
+            className="text-center img-fluid" />
         </div>
-        
+
         <div>
           <small> Parar: {name}</small>
         </div>
-        {formatter.format(valorPix)}
         <div>
-          
-          <small>Valor: R${valorPix}</small>
-          
+          <small>Valor: {valorPix}</small>
         </div>
         <Button className="bi bi-clipboard-check badge mr-08 Dark text-white" onClick={handToast}> COPIAR
         </Button>
-        <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide top-center className=" top-center text-white bg-success">
-          <Toast.Header className="bg-success d-inline-block m-1">
-            <strong className="me-auto text-white bg-success bi bi-clipboard-check">COPIADO</strong>
-          </Toast.Header>
-          <Toast.Body>COPIADO COM SUCESSO!</Toast.Body>
-        </Toast>
+
       </Card.Footer>
 
     </>

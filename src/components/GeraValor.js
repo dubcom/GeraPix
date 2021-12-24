@@ -90,12 +90,12 @@ export default function GerarValor() {
                 onChange={(event) => setPix(event.target.value)} /> */}
               <small className="form-text text-muted">R$ 0.00 Digite o valor do PIX </small>
               <CurrencyInput onChange={(event) => setPix(event.target.value)}
-               className="form-control" 
-               name="newPix"
-              type="tel"
-              decimalLimit="2"
-              placeholder="R$ 0.00"/>
-            
+                className="form-control"
+                name="newPix"
+                type="tel"
+                decimalLimit="2"
+                placeholder="R$ 0.00" />
+
               <div>Valor: {newPix} </div>
             </Form.Group>
             <Form.Control type="text" name="newTextId" required placeholder="Digite um Identificador da venda"
