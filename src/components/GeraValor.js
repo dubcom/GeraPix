@@ -23,12 +23,10 @@ export default function GerarValor() {
 
     try {
       await logout()
-      setLoading(false)
-      history.push("/Login")
+      history.push("/")
     } catch {
       setError("Falha para fazer logout")
     }
-
   }
 
   //Criar pix realtime 

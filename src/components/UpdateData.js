@@ -22,12 +22,10 @@ export default function UpData() {
 
     try {
       await logout()
-      setLoading(false)
-      history.push("/Login")
+      history.push("/")
     } catch {
       setError("Falha para fazer logout")
     }
-
   }
   // redirecionar sem login l
 
@@ -64,7 +62,7 @@ export default function UpData() {
       chave: newChave,
     })
     history.push("/Profile")
-console.log(newName)
+    console.log(newName)
   }
   // fim do Atualizar database
 
@@ -77,7 +75,7 @@ console.log(newName)
           </Button>
         </div>
         <Card.Body>
-        <img src={logo} alt="Gera pix" width="200"/>
+          <img src={logo} alt="Gera pix" width="200" />
           {error && <Alert variant="danger">{error}</Alert>}
           {currentUser?.uid.length > 0 && <div className="user-info text-center">
             <img className="rounded-circle  mb-4  text-center" src={currentUser.photoURL} alt={currentUser.displayName} />
@@ -124,7 +122,7 @@ console.log(newName)
           <Link to="/">Cancelar</Link>
         </div>
       </Card.Footer>
-    
+
 
     </>
   )
