@@ -73,10 +73,10 @@ export default function GenerationQRCode() {
   // gerar qrcode Payload
   const pix = new Pix(
     chave,
-    menseger.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+    menseger.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, ''),
     name.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     city.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-    textId.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+    textId.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, ''),
     valorPix
   );
   const payload = pix.getPayload();
@@ -137,6 +137,9 @@ function handToast () {
         </div>
         <div>
           <small>Valor: {valorPix}</small>
+        </div>
+        <div>
+          <small>Mensagem: {menseger.replace(/\s/g, '')}</small>
         </div>
         <Button className="bi bi-clipboard-check badge mr-08 Dark text-white" onClick={handToast}> COPIAR
         </Button>
