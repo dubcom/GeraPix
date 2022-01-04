@@ -6,6 +6,7 @@ import CurrencyInput from 'react-currency-masked-input'
 import firebase from 'firebase'
 import 'firebase/database'
 import logo from '../image/logo.png'
+
 export default function GerarValor() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
@@ -14,8 +15,12 @@ export default function GerarValor() {
   const [newPix, setPix] = useState('')
   const [newTextId, setTextId] = useState(' ')
   const [newMenseger, setMenseger] = useState(' ')
+
+
+  //Logout
   async function handleLogout() {
     setError("")
+
     try {
       await logout()
       setLoading(false)
@@ -23,8 +28,9 @@ export default function GerarValor() {
     } catch {
       setError("Falha para fazer logout")
     }
+
   }
-  // redirecionar sem login l
+
   //Criar pix realtime 
   const user = firebase.auth().currentUser;
   async function handCreatPix(event) {
