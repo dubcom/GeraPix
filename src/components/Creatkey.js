@@ -79,7 +79,7 @@ async function handCreatClient(event){
         
         <Card.Body>
           <div>
-            <img src={logo}alt="Gera pix"  className="card-img-top" /> 
+            <img src={logo}alt="Gera pix"  width="200" /> 
           </div>
         
           <h6 className="text-center font-weight-bold ">CONTA</h6>

@@ -32,7 +32,7 @@ export default function ForgotPassword() {
     <>
       <Card className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
         <Card.Body>
-        <img src={logo}alt="Gera pix" className="rounded mx-auto d-block mb-4" />
+        <img src={logo}alt="Gera pix" width="200"/>
           <h2 className="text-center mt-4">RECUPERAR SENHA</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           {message && <Alert variant="success">{message}</Alert>}

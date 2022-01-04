@@ -63,7 +63,7 @@ export default function GerarValor() {
         </div>
         <Card.Body>
           <div className="text-center">
-            <img src={logo} alt="Gera pix" className="img-fluid " />
+            <img src={logo} alt="Gera pix" width="200"/>
             {error && <Alert variant="danger">{error}</Alert>}
           </div>
         </Card.Body>
