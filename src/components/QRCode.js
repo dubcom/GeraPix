@@ -73,10 +73,17 @@ export default function GenerationQRCode() {
   // gerar qrcode Payload
   const pix = new Pix(
     chave,
+<<<<<<< Updated upstream
     menseger.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     name.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     city.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     textId.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+=======
+    menseger.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, ''),
+    name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, ''),
+    city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, ''),
+    textId.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, ''),
+>>>>>>> Stashed changes
     valorPix
   );
   const payload = pix.getPayload();

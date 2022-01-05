@@ -3,7 +3,7 @@ import Signup from "./Signup"
 import { Container } from "react-bootstrap"
 import { AuthProvider } from "../contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import Dashboard from "./Creatkey"
+import Creatkey from "./Creatkey"
 import UpData from "./UpdateData"
 import Login from "./Login"
 import PrivateRoute from "./PrivateRoute"
@@ -30,7 +30,7 @@ function App() {
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
-              <Route path="/Creatkey" component={Dashboard} />
+              <Route path="/Creatkey" component={Creatkey} />
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/UpData" component={UpData} />
               <Route path="/GerarValor" component={GerarValor} />

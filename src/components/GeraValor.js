@@ -2,17 +2,22 @@ import React, { useState } from "react"
 import { Form, Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+<<<<<<< Updated upstream
 import CurrencyInput from 'react-currency-masked-input'
 
 
 
 
+=======
+import CurrencyInput from "react-currency-input-field";
+>>>>>>> Stashed changes
 import firebase from 'firebase'
 import 'firebase/database'
 
 import logo from '../image/logo.png'
 
 export default function GerarValor() {
+<<<<<<< Updated upstream
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const history = useHistory()
@@ -21,6 +26,22 @@ export default function GerarValor() {
   const [newPix, setPix] = useState('')
   const [newTextId, setTextId] = useState(' ')
   const [newMenseger, setMenseger] = useState(' ')
+=======
+  const [error, setError] = useState("");
+  const { currentUser, logout } = useAuth();
+  const history = useHistory();
+  const [newPix, setPix] = useState(0);
+  const [newTextId, setTextId] = useState('Gerapix');
+  const [newMenseger, setMenseger] = useState('Gerapix');
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { value = "" } = e.target;
+    const parsedValue = value.replace(/[^\d.]/gi, "");
+    setPix(parsedValue);
+  };
+
+  const handleOnBlur = () => setPix(Number(newPix).toFixed(2));
+>>>>>>> Stashed changes
 
 
   async function handleLogout() {
@@ -55,7 +76,7 @@ export default function GerarValor() {
     // }
 
     const firebaseClient = {
-      valorPix: newPix.replace(/[^0-9]/g, ''),
+      valorPix: newPix,
       authorId: currentUser.uid,
       textId: newTextId,
       menseger: newMenseger,
@@ -89,11 +110,17 @@ export default function GerarValor() {
               {/* <Form.Control className="form-control" type="number" name="newPix" required placeholder="R$ 0.00"
                 onChange={(event) => setPix(event.target.value)} /> */}
               <small className="form-text text-muted">R$ 0.00 Digite o valor do PIX </small>
-              <CurrencyInput onChange={(event) => setPix(event.target.value)}
+              <CurrencyInput 
                 className="form-control"
+                data-number-to-fixed="2"
+                data-number-stepfactor="100"
                 name="newPix"
                 type="tel"
                 decimalLimit="2"
+                fixedDecimalLength
+                prefix="R$"
+                onChange={handleChange}
+                onBlur={handleOnBlur}
                 placeholder="R$ 0.00" />
 
               <div>Valor: {newPix} </div>

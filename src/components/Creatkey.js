@@ -9,13 +9,11 @@ import 'firebase/database'
 
 import logo from '../image/logo.png'
 
-export default function Dashboard() {
-  
+export default function Creatkey() {
+ 
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const history = useHistory()
-
-
 
   async function handleLogout() {
     setError("")
@@ -56,6 +54,7 @@ async function handCreatClient(event){
     authorId: currentUser?.uid,
     city: newCity,
     chave: newChave,
+    createdAt: new Date().toLocaleString().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
   };
 
   // await firebase.database().ref(`clients/${currentUser?.uid}`).push(firebaseClient);
