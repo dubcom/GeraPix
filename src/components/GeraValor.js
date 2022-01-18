@@ -13,19 +13,19 @@ export default function GerarValor() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
-  const [newPix, setPix] = useState("0.01");
+  const [newPix, setPix] = useState("");
   const [newTextId, setTextId] = useState('Gerapix');
   const [newMenseger, setMenseger] = useState('Gerapix');
   const handleChange = (e) => {
     e.preventDefault();
     const { value = "" } = e.target;
-    const parsedValue = value.replace(/[^\d.]/gi, "");
+    const parsedValue = value.replace(/[^\d.]/gi, "").toFixed(2);
     setPix(parsedValue);
     console.log(parsedValue);
   
   };
 
-  const handleOnBlur = () => setPix(Number(newPix).toFixed(2));
+  const handleOnBlur = () => setPix(Number(newPix));
 
 //logout incio 
 async function handleLogout() {
