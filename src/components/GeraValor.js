@@ -19,13 +19,13 @@ export default function GerarValor() {
   const handleChange = (e) => {
     e.preventDefault();
     const { value = "" } = e.target;
-    const parsedValue = value.replace(/[^\d.]/gi, "").toFixed(2);
+    const parsedValue = value.replace(/[^\d.]/gi, "");
     setPix(parsedValue);
     console.log(parsedValue);
   
   };
 
-  const handleOnBlur = () => setPix(Number(newPix));
+  const handleOnBlur = () => setPix(Number(newPix).toFixed(2));
 
 //logout incio 
 async function handleLogout() {
@@ -46,18 +46,8 @@ async function handleLogout() {
   async function handCreatPix(event) {
     event.preventDefault()
 
-    // if (newPix.trim() === '') {
-    //   return
-    // }
-    // if (newTextId.trim() === '') {
-    //   return
-    // }
-    // if (newMenseger.trim() === '') {
-    //   return
-    // }
-
     const firebaseClient = {
-      valorPix: newPix,
+      valorPix: newPix.replace(/[^\d.]/gi, ""),
       authorId: currentUser.uid,
       textId: newTextId,
       menseger: newMenseger,
@@ -66,7 +56,6 @@ async function handleLogout() {
     await firebase.database().ref(`clients/${user?.uid}/PixCreated/`).push(firebaseClient);
     history.push("/QRCode")
   };
-
   // fim do criar pix database
   return (
     <>
@@ -97,7 +86,7 @@ async function handleLogout() {
                 type="tel"
                 disableAbbreviations
                 allowDecimals
-                decimalLimit="2"
+                
                 fixedDecimalLength="2"
                 onChange={handleChange}
                 onBlur={handleOnBlur}
