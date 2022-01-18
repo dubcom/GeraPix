@@ -18,12 +18,13 @@ export default function Profile() {
   const user = firebase.auth().currentUser;
   //logout incio 
   async function handleLogout() {
-    setError("Algo deu errado")
+    setError("")
+
     try {
       await logout()
-      history.push("/Login")
+      history.push("/")
     } catch {
-      setError("Failed to log out")
+      setError("Falha para fazer logout")
     }
   }
   // Recuperara dados do realtime database 
@@ -31,19 +32,13 @@ export default function Profile() {
 
   async function GetData() {
     const chaveRes = await chaveRef.child(`clients/${user?.uid}/key/`).get(user?.uid);
-    
+
     const dataChave = [];
     const dataRes = chaveRes.val();
     for (let id in dataRes) {
       dataChave.push(id, dataRes);
     };
-    // ver dados do realtime database redirecionar para a pagina de valor
-  if (chaveRes.val() === null) {
-    history.push("/Creatkey")
-  } else {
-    history.push("/GerarValor")
-  }
-    // Fim do codigo redirecionamento
+   
     const resChave = Object.entries(chaveRes.val() ?? {}).map(([key, value]) => {
       return {
         'chave': value.chave,
@@ -52,12 +47,20 @@ export default function Profile() {
       }
     }
     );
+    // ver dados do realtime database redirecionar para a pagina de valor
+    if (chaveRes.val() === null) {
+      history.push("/Creatkey")
+    } else {
+      history.push("/GerarValor")
+    
+    // Fim do codigo redirecionament
     setChave(resChave[0].chave);
-    setCity(resChave[0].city); 
+    setCity(resChave[0].city);
     setName(resChave[0].name);
   };
+  };
   GetData();
- 
+
   return (
     <>
       <Card className="text-light shadow  bg-secondary rounded mb-2">

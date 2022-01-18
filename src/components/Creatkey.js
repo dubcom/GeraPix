@@ -5,21 +5,14 @@ import { Link, useHistory } from "react-router-dom"
 
 import firebase from 'firebase'
 import 'firebase/database'
-
-
 import logo from '../image/logo.png'
 
-export default function Dashboard() {
-  
+export default function Creatkey() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const history = useHistory()
-
-
-
   async function handleLogout() {
     setError("")
-
     try {
       await logout()
       history.push("/")
@@ -27,16 +20,12 @@ export default function Dashboard() {
       setError("Falha para fazer logout")
     }
   }
-  // redirecionar sem login l
 
   const user = firebase.auth().currentUser;
   //criar database realtime 
-  
   const [newChave, setNewChave] = useState('')
   const [newCity, setNewcity] = useState('')
   const [newName, setNewName] = useState('')
-  
-  
 
 async function handCreatClient(event){
   event.preventDefault()
@@ -56,17 +45,12 @@ async function handCreatClient(event){
     authorId: currentUser?.uid,
     city: newCity,
     chave: newChave,
+    createdAt: new Date().toLocaleString().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
   };
-
-  // await firebase.database().ref(`clients/${currentUser?.uid}`).push(firebaseClient);
   await firebase.database().ref(`clients/${user?.uid}/key`).push(firebaseClient);
-
-  
   history.push("/GerarValor")
-
 }
 // fim do criar database
-
   return (
     <>
       <Card className="text-white  shadow  bg-secondary rounded mb-2">
