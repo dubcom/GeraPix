@@ -73,10 +73,10 @@ export default function GenerationQRCode() {
   // gerar qrcode Payload
   const pix = new Pix(
     chave,
-    menseger.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+    menseger.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, ''),
     name.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     city.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-    textId.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+    textId.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, ''),
     valorPix
   );
   const payload = pix.getPayload();
@@ -125,6 +125,13 @@ export default function GenerationQRCode() {
             <Toast.Body>COPIADO COM SUCESSO!</Toast.Body>
           </Toast>
           {error && <Alert variant="danger">{error}</Alert>}
+          <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide top-center className=" top-center text-white bg-success">
+          <Toast.Header className="bg-success d-inline-block m-1">
+          <img src={logo} alt="Gera pix" width="100"/>
+            <strong className="me-auto text-white bg-success">   COPIADO     </strong>
+          </Toast.Header>
+          <Toast.Body>COPIADO COM SUCESSO!</Toast.Body>
+        </Toast>
         </Card.Body>
       </Card>
       <Card.Footer className="shadow text-center bg-dark text-white rounded">
@@ -143,9 +150,11 @@ export default function GenerationQRCode() {
         <div>
           <small>Valor: {valorPix}</small>
         </div>
+        <div>
+          <small>Mensagem: {menseger.replace(/\s/g, '')}</small>
+        </div>
         <Button className="bi bi-clipboard-check badge mr-08 Dark text-white" onClick={handToast}> COPIAR
         </Button>
-
       </Card.Footer>
 
     </>

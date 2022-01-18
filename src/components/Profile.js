@@ -70,7 +70,7 @@ export default function Profile() {
           </Button>
         </div>
         <Card.Body>
-          <img src={logo} alt="Gera pix" className="card-img-top mx-auto d-block mb-4" />
+          <img src={logo} alt="Gera pix" width="200" />
           <h4 className="text-center mb-4 text-black">SUA CONTA</h4>
           {error && <Alert variant="danger">{error}</Alert>}
           <p>Os dados que aparecem aqui são os dados que você cadastrou no seu perfil.

@@ -57,7 +57,7 @@ export default function Login() {
     <>
       <Card className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
         <Card.Body>
-        <img src={logo}alt="Gera pix" className="card-img-top mx-auto d-block mb-4" />
+        <img src={logo}alt="Gera pix" width="200"/>
         <p className="text-center"> Faça seu login e cria sua conta PIX. 
         Simples rápido e fácil. Caso não tenha conta basta 
         <Link className="btn btn-link" to="/signup">clicar aqui</Link>e crirar uma.

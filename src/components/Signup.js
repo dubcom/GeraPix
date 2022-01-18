@@ -64,7 +64,7 @@ history.push("/")
       <Card className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
         <Card.Body>
     
-        <img src={logo}alt="Gera pix" className="card-img-top mx-auto d-block mb-4"/>
+        <img src={logo}alt="Gera pix" width="200"/>
           <h3 className="text-center mb-4 font-weight-bold">CRIAR CONTA</h3>
           <p className="text-center">Cria sua conta, é grátis!</p>
             <button onClick={handLoginGoogle}  className="w-100 mt-4 btn btn-primary btn-lg btn btn-danger" >

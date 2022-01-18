@@ -6,7 +6,6 @@ import { Link, useHistory } from "react-router-dom"
 import CurrencyInput from "react-currency-input-field";
 import firebase from 'firebase'
 import 'firebase/database'
-
 import logo from '../image/logo.png'
 
 export default function GerarValor() {
@@ -42,7 +41,6 @@ async function handleLogout() {
 
   //Criar pix realtime 
   const user = firebase.auth().currentUser;
-
   async function handCreatPix(event) {
     event.preventDefault()
 
@@ -67,7 +65,7 @@ async function handleLogout() {
         </div>
         <Card.Body>
           <div className="text-center">
-            <img src={logo} alt="Gera pix" className="img-fluid " />
+            <img src={logo} alt="Gera pix" width="200"/>
             {error && <Alert variant="danger">{error}</Alert>}
           </div>
         </Card.Body>
@@ -107,12 +105,10 @@ async function handleLogout() {
         </div>
         <div className="pl-3 pr-3 row justify-content-between mt-4">
           <Link className="btn btn-primary btn-sm" to="/UpData">Atualizar chave</Link>
-
           <Link to="/update-profile" className="btn btn-primary btn-sm mt-8">
             Atualizar senha
           </Link>
         </div>
-
       </Card.Footer>
     </>
   )

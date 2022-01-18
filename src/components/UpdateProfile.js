@@ -55,19 +55,22 @@ export default function UpdateProfile() {
 
   return (
     <>
-      <Card className="text-light shadow bg-dark rounded p-3">
+      <Card className="shadow bg-dark rounded p-3">
         <div className="w-100 text-right">
           <Button className="mr-03 badge badge-secondary" variant="link" onClick={handleLogout}>
             SAIR
           </Button>
         </div>
-        <Card.Body>
-          <img src={logo} alt="Gera pix" className="card-img-top mx-auto d-block " />
-          <h2 className="text-center mb-4">Atualizar dados</h2>
+        <Card.Body className="text-light">
+          <div className="text-center">
+            <img src={logo} alt="Gera pix"  width="200"/> 
+          </div>
+        
+          <h5 className="text-center mt-4">Atualizar dados</h5>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label className="mb-0" >E-mail</Form.Label>
+            <Form.Group id="email" >
+              <Form.Label className="text-light mb-0" >E-mail</Form.Label>
               <Form.Control
                 className="form-control-sm"
                 type="email"
