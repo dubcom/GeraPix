@@ -80,6 +80,8 @@ export default function GenerationQRCode() {
     valorPix
   );
   const payload = pix.getPayload();
+
+  
   //logout incio 
   async function handleLogout() {
     setError("Algo deu errado")

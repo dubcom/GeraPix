@@ -38,7 +38,6 @@ async function handleLogout() {
     setError("Falha para fazer logout")
   }
 }
-  // redirecionar sem login l
 
 
   //Criar pix realtime 
