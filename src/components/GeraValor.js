@@ -2,35 +2,18 @@ import React, { useState } from "react"
 import { Form, Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
-<<<<<<< Updated upstream
-import CurrencyInput from 'react-currency-masked-input'
 
-
-
-
-=======
 import CurrencyInput from "react-currency-input-field";
->>>>>>> Stashed changes
 import firebase from 'firebase'
 import 'firebase/database'
 
 import logo from '../image/logo.png'
 
 export default function GerarValor() {
-<<<<<<< Updated upstream
-  const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
-  const history = useHistory()
-  const [setLoading] = useState(false)
-
-  const [newPix, setPix] = useState('')
-  const [newTextId, setTextId] = useState(' ')
-  const [newMenseger, setMenseger] = useState(' ')
-=======
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
-  const [newPix, setPix] = useState(0);
+  const [newPix, setPix] = useState("0.01");
   const [newTextId, setTextId] = useState('Gerapix');
   const [newMenseger, setMenseger] = useState('Gerapix');
   const handleChange = (e) => {
@@ -38,24 +21,23 @@ export default function GerarValor() {
     const { value = "" } = e.target;
     const parsedValue = value.replace(/[^\d.]/gi, "");
     setPix(parsedValue);
+    console.log(parsedValue);
+  
   };
 
   const handleOnBlur = () => setPix(Number(newPix).toFixed(2));
->>>>>>> Stashed changes
 
+//logout incio 
+async function handleLogout() {
+  setError("")
 
-  async function handleLogout() {
-    setError("")
-
-    try {
-      await logout()
-      setLoading(false)
-      history.push("/Login")
-    } catch {
-      setError("Falha para fazer logout")
-    }
-
+  try {
+    await logout()
+    history.push("/")
+  } catch {
+    setError("Falha para fazer logout")
   }
+}
   // redirecionar sem login l
 
 
@@ -116,9 +98,10 @@ export default function GerarValor() {
                 data-number-stepfactor="100"
                 name="newPix"
                 type="tel"
+                disableAbbreviations
+                allowDecimals
                 decimalLimit="2"
-                fixedDecimalLength
-                prefix="R$"
+                fixedDecimalLength="2"
                 onChange={handleChange}
                 onBlur={handleOnBlur}
                 placeholder="R$ 0.00" />
