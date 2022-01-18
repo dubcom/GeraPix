@@ -88,8 +88,6 @@ async function handleLogout() {
           <Form>
             <Form.Group className="mb-4 mt-4" id="chave">
               <Form.Label className="mb-0">Valor da conta</Form.Label>
-              {/* <Form.Control className="form-control" type="number" name="newPix" required placeholder="R$ 0.00"
-                onChange={(event) => setPix(event.target.value)} /> */}
               <small className="form-text text-muted">R$ 0.00 Digite o valor do PIX </small>
               <CurrencyInput 
                 className="form-control"
