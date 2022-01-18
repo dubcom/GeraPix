@@ -76,7 +76,7 @@ export default function GerarValor() {
                 data-number-to-fixed="2"
                 data-number-stepfactor="100"
                 name="newPix"
-                type="tel"
+                type="number"
                 disableAbbreviations
                 allowDecimals
                 fixedDecimalLength="2"
