@@ -1,2 +1,4 @@
 node_modules
 .env.local
+yarn.lock
+yarn-error.log

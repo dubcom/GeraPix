@@ -21,24 +21,19 @@ export default function GerarValor() {
     const parsedValue = value.replace(/[^\d.]/gi, "");
     setPix(parsedValue);
     console.log(parsedValue);
-  
   };
-
   const handleOnBlur = () => setPix(Number(newPix).toFixed(2));
+  //logout incio 
+  async function handleLogout() {
+    setError("")
 
-//logout incio 
-async function handleLogout() {
-  setError("")
-
-  try {
-    await logout()
-    history.push("/")
-  } catch {
-    setError("Falha para fazer logout")
+    try {
+      await logout()
+      history.push("/")
+    } catch {
+      setError("Falha para fazer logout")
+    }
   }
-}
-
-
   //Criar pix realtime 
   const user = firebase.auth().currentUser;
   async function handCreatPix(event) {
@@ -65,7 +60,7 @@ async function handleLogout() {
         </div>
         <Card.Body>
           <div className="text-center">
-            <img src={logo} alt="Gera pix" width="200"/>
+            <img src={logo} alt="Gera pix" width="200" />
             {error && <Alert variant="danger">{error}</Alert>}
           </div>
         </Card.Body>
@@ -73,10 +68,10 @@ async function handleLogout() {
       <Card.Footer className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
         <div className="user-info text-center mb-4">
           <Form>
-            <Form.Group className="mb-4 mt-4" id="chave">
-              <Form.Label className="mb-0">Valor da conta</Form.Label>
-              <small className="form-text text-muted">R$ 0.00 Digite o valor do PIX </small>
-              <CurrencyInput 
+            <Form.Group className="mb-4" id="chave">
+              <Form.Label className="mb-0"><h4>Valor da conta</h4></Form.Label>
+              <small className="form-text text-muted">{newPix} Digite o valor do PIX </small>
+              <CurrencyInput
                 className="form-control"
                 data-number-to-fixed="2"
                 data-number-stepfactor="100"
@@ -84,21 +79,19 @@ async function handleLogout() {
                 type="tel"
                 disableAbbreviations
                 allowDecimals
-                
                 fixedDecimalLength="2"
                 onChange={handleChange}
                 onBlur={handleOnBlur}
                 placeholder="R$ 0.00" />
 
-              <div>Valor: {newPix} </div>
+              <small className="form-text text-right text-muted">Digite mensagem para o cliente </small>
+              <Form.Control type="text" name="newTextId" required placeholder="Digite um Identificador da venda"
+                onChange={(event) => setTextId(event.target.value)} />
+              <small className="form-text text-right text-muted">Digite um identificador da venda </small>
+              <Form.Control type="text" name="newMenseger" required placeholder="Mensagem para o cliente"
+                onChange={(event) => setMenseger(event.target.value)} />
             </Form.Group>
-            <Form.Control type="text" name="newTextId" required placeholder="Digite um Identificador da venda"
-              onChange={(event) => setTextId(event.target.value)} />
-            <small className="form-text text-right text-muted">Digite mensagem para o cliente </small>
-            <Form.Control type="text" name="newMenseger" required placeholder="Mensagem para o cliente"
-              onChange={(event) => setMenseger(event.target.value)} />
-            <small className="form-text text-right text-muted">Digite um identificador da venda </small>
-            <Button onClick={handCreatPix} className="w-100 mb-4 " type="submit">
+            <Button onClick={handCreatPix} className="w-100" type="submit">
               CRIAR QR-CODE
             </Button>
           </Form>

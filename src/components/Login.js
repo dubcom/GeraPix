@@ -1,4 +1,4 @@
-import React, { useRef, useState} from "react"
+import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
@@ -18,7 +18,7 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault()
- 
+
     try {
       setError("")
       setLoading(true)
@@ -27,54 +27,54 @@ export default function Login() {
     } catch {
       setError("Senhar ou e-mail incorreto")
     }
-    
+
 
     setLoading(false)
-  
-  } 
 
-//login google incio
+  }
+
+  //login google incio
 
   async function handLoginGoogle() {
-  
+
     const provider = new firebase.auth.GoogleAuthProvider();
     await firebase.auth().signInWithPopup(provider).then((result) => {
-   
-    
-  })
-  try {
-    setError("")
-    setLoading(true)
-    history.push("/")
-  } catch{
-    setError("Algo deu errado, tente novamente")
-    
+
+
+    })
+    try {
+      setError("")
+      setLoading(true)
+      history.push("/")
+    } catch {
+      setError("Algo deu errado, tente novamente")
+
+    }
+
   }
-  
-}
-// login google final 
+  // login google final 
   return (
     <>
       <Card className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
         <Card.Body>
-        <img src={logo}alt="Gera pix" width="200"/>
-        <p className="text-center"> Faça seu login e cria sua conta PIX. 
-        Simples rápido e fácil. Caso não tenha conta basta 
-        <Link className="btn btn-link" to="/signup">clicar aqui</Link>e crirar uma.
-        </p>
-        
+          <img src={logo} alt="Gera pix" width="200" />
+          <p className="text-center"> Faça seu login e cria sua conta PIX.
+            Simples rápido e fácil. Caso não tenha conta basta
+            <Link className="btn btn-link" to="/signup">clicar aqui</Link>e crirar uma.
+          </p>
+
           <p className="text-center mb-4 mt-4">ENTRAR NA CONTA</p>
-          {error && <Alert variant="danger">{error}</Alert>} 
-          <button onClick={handLoginGoogle}  className="w-100 mt-4 mb-4 btn-lg btn btn-danger" >
+          {error && <Alert variant="danger">{error}</Alert>}
+          <button onClick={handLoginGoogle} className="w-100 mt-4 mb-4 btn-lg btn btn-danger" >
             <img className="pr-4" src={googleIconImg} alt="Logo do Google" />
-             Use o Google
+            Use o Google
           </button>
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
               <Form.Label className="mt-1 mb-0">E-mail</Form.Label>
               <Form.Control type="email" ref={emailRef} required placeholder="Digite seu e-mail" />
             </Form.Group>
-            <Form.Group  id="password">
+            <Form.Group id="password">
               <Form.Label className="mb-0">Senha</Form.Label>
               <Form.Control className="form-control Default input" type="password" ref={passwordRef} required placeholder="Digite sua senha!" />
             </Form.Group>
@@ -93,4 +93,4 @@ export default function Login() {
     </>
   )
 
-  }
+}
