@@ -70,13 +70,13 @@ export default function GerarValor() {
           <Form>
             <Form.Group className="mb-4" id="chave">
               <Form.Label className="mb-0"><h4>Valor da conta</h4></Form.Label>
-              <small className="form-text text-muted">{newPix} Digite o valor do PIX </small>
+              <small className="form-text text-muted">R${newPix} Digite o valor do PIX </small>
               <CurrencyInput
                 className="form-control"
                 data-number-to-fixed="2"
                 data-number-stepfactor="100"
                 name="newPix"
-                type="number"
+                id="newPix"
                 disableAbbreviations
                 allowDecimals
                 fixedDecimalLength="2"
