@@ -12,7 +12,7 @@ export default function GerarValor() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
-  const [newPix, setPix] = useState("");
+  const [newPix, setPix] = useState();
   const [newTextId, setTextId] = useState('Gerapix');
   const [newMenseger, setMenseger] = useState('Gerapix');
   const handleChange = (e) => {
@@ -20,7 +20,7 @@ export default function GerarValor() {
     const { value = "" } = e.target;
     const parsedValue = value.replace(/[^\d.]/gi, "");
     setPix(parsedValue);
-    console.log(parsedValue);
+    console.log(value);
   };
   const handleOnBlur = () => setPix(Number(newPix).toFixed(2));
   //logout incio 
@@ -40,7 +40,7 @@ export default function GerarValor() {
     event.preventDefault()
 
     const firebaseClient = {
-      valorPix: newPix.replace(/[^\d.]/gi, ""),
+      valorPix: newPix,
       authorId: currentUser.uid,
       textId: newTextId,
       menseger: newMenseger,
@@ -77,9 +77,11 @@ export default function GerarValor() {
                 data-number-stepfactor="100"
                 name="newPix"
                 id="newPix"
-                disableAbbreviations
-                allowDecimals
-                fixedDecimalLength="2"
+                value={newPix}
+                // disableAbbreviations
+                // allowDecimals
+                decimalsLimit="2"
+                // fixedDecimalLength="2"
                 onChange={handleChange}
                 onBlur={handleOnBlur}
                 placeholder="R$ 0.00" />
