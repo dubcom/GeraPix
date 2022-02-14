@@ -78,10 +78,10 @@ export default function GerarValor() {
                 name="newPix"
                 id="newPix"
                 value={newPix}
-                // disableAbbreviations
-                // allowDecimals
+                disableAbbreviations
+                allowDecimals
                 decimalsLimit="2"
-                // fixedDecimalLength="2"
+                fixedDecimalLength="2"
                 onChange={handleChange}
                 onBlur={handleOnBlur}
                 placeholder="R$ 0.00" />
