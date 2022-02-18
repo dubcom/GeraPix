@@ -1,16 +1,27 @@
 # SISTEMA PARA GERAR PIX 
 
 APP para gerar um PIX e código de PAYLOAD, para enviar ou mostrar para clientes.
+
+Forma fácil de gerar, com um cadastro rápido e simples, via e-mail ou conta **Google** Depois de feito o login basta cadastrar a chave PIX e logo vai para um formulário para gerar o PIX.
+
+Bastando colocar valor e mensagem para o cliente* e identificação da venda*
+
+
 <img width="410" alt="Screen Shot 2022-02-18 at 08 56 27" src="https://user-images.githubusercontent.com/58779341/154678775-8efd6834-6c52-4bb1-af88-ebe334aa805c.png">
 <img width="380" alt="Screen Shot 2022-02-18 at 08 58 44" src="https://user-images.githubusercontent.com/58779341/154679020-37286c82-75fa-4ff3-bfae-635f9d56e90b.png">
 
 
+* *Não obiratório* 
 
 
 
-### Deploy in [vercel](https://gerapix.vercel.app/)
 
-Usando **FIREBASE** Auth
+## Deploy in [vercel](https://gerapix.vercel.app/)
+
+Usando **FIREBASE** Auth 
+
+
+---
 
 
 
