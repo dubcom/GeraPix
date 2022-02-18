@@ -1,6 +1,16 @@
+# SISTEMA PARA GERAR PIX 
+
+APP para gerar um PIX e código de PAYLOAD, para enviar ou mostrar para clientes.
+<img width="410" alt="Screen Shot 2022-02-18 at 08 56 27" src="https://user-images.githubusercontent.com/58779341/154678775-8efd6834-6c52-4bb1-af88-ebe334aa805c.png">
+<img width="380" alt="Screen Shot 2022-02-18 at 08 58 44" src="https://user-images.githubusercontent.com/58779341/154679020-37286c82-75fa-4ff3-bfae-635f9d56e90b.png">
 
 
-Deploy in [vercel](https://gerapix.vercel.app/)
+
+
+
+### Deploy in [vercel](https://gerapix.vercel.app/)
+
+Usando **FIREBASE** Auth
 
 
 
@@ -70,3 +80,5 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+<img width="675" alt="Screen Shot 2022-02-18 at 08 58 44" src="https://user-images.githubusercontent.com/58779341/154679020-37286c82-75fa-4ff3-bfae-635f9d56e90b.png">
