@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { Card, Button, Alert, Toast } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
-import "bootstrap-icons/font/bootstrap-icons.css"
-
-
-
-import "firebase/database";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import firebase from 'firebase';
-
+import "firebase/database";
+import React, { useState } from "react";
+import { Alert, Button, Card, Toast } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import logo from '../image/logo.png';
 import Pix from "./Pix";
+
+
+
+
 
 const QRCode = require('qrcode.react');
 
@@ -51,7 +51,7 @@ export default function GenerationQRCode() {
     setTextId(resPix[0].textId);
     setValorPix(resPix[0].valorPix);
     // get chave do cliente
-    const chaveRes = await chaveRef.child(`clients/${user.uid}/key/`).get();
+    const chaveRes = await chaveRef.child(`clients/${user.uid}/key/`).limitToLast(1).get();
     const dataChave = [];
     const dataRes = chaveRes.val();
     for (let id in dataRes) {
@@ -81,7 +81,7 @@ export default function GenerationQRCode() {
   );
   const payload = pix.getPayload();
 
-  
+
   //logout incio 
   async function handleLogout() {
     setError("Algo deu errado")
@@ -114,24 +114,15 @@ export default function GenerationQRCode() {
         </div>
         <Card.Body>
           <img src={logo} alt="Gera pix" width="200px" />
-          <Toast onClose={() => setShow(false)}
-            show={show} d
-            elay={3000}
-            autohide top-center className=" top-center text-white bg-success">
+        
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Toast onClose={() => setShow(false)} show={show} delay={2500} autohide top-center className=" top-center text-white bg-success">
             <Toast.Header className="bg-success d-inline-block m-1">
-              <img src={logo} alt="Gera pix" className="img-fluid bi bi-clipboard-check" width="100px" />
-
+              <img src={logo} alt="Gera pix" width="100" />
+              <strong className="me-auto text-white bg-success">   COPIADO     </strong>
             </Toast.Header>
             <Toast.Body>COPIADO COM SUCESSO!</Toast.Body>
           </Toast>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide top-center className=" top-center text-white bg-success">
-          <Toast.Header className="bg-success d-inline-block m-1">
-          <img src={logo} alt="Gera pix" width="100"/>
-            <strong className="me-auto text-white bg-success">   COPIADO     </strong>
-          </Toast.Header>
-          <Toast.Body>COPIADO COM SUCESSO!</Toast.Body>
-        </Toast>
         </Card.Body>
       </Card>
       <Card.Footer className="shadow text-center bg-dark text-white rounded">
