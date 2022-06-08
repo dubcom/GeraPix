@@ -6,10 +6,6 @@ import { Link, useHistory } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 import logo from '../image/logo.png'
 
-
-
-
-
 export default function UpData() {
 
   const [error, setError] = useState("")
@@ -36,8 +32,6 @@ export default function UpData() {
   const [newCity, setNewcity] = useState('')
   const [newName, setNewName] = useState('')
 
-
-
   async function handUpdateClient(event) {
     event.preventDefault()
 
@@ -51,10 +45,7 @@ export default function UpData() {
       return
     }
 
-
-
     const clientRef = firebase.database().ref(`clients/${user?.uid}/key`);
-
     const firebaseClient = await clientRef.push({
       name: newName,
       authorId: currentUser?.uid,
@@ -110,10 +101,8 @@ export default function UpData() {
             <small className="mt-0 form-text text-muted">Cidade do beneficiário ou da transação (até 15 letras) </small>
           </Form.Group>
 
-
           <div className="text-center">
             <Button disabled={loading} className="btn w-100 mb-4 mt-8" type="submit">Atualizar chave</Button>
-
 
           </div>
         </Form>
@@ -122,7 +111,6 @@ export default function UpData() {
           <Link to="/">Cancelar</Link>
         </div>
       </Card.Footer>
-
 
     </>
   )

@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import "firebase/database";
 import React, { useState } from "react";
 import { Alert, Button, Card, Toast } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import logo from '../image/logo.png';
 import Pix from "./Pix";
@@ -18,8 +18,9 @@ export default function GenerationQRCode() {
   const [name, setName] = useState('');
   const [valorPix, setValorPix] = useState('');
   const [textId, setTextId] = useState('');
-  const [messenger, setMessenger] = useState('');
+  const [message, setMessage] = useState('');
   const [show, setShow] = useState(false);
+  const id = useParams().idKey;
 
   const { logout } = useAuth();
   const history = useHistory();
@@ -29,24 +30,15 @@ export default function GenerationQRCode() {
   const clientsRef = firebase.database().ref();
   const chaveRef = firebase.database().ref();
   async function GetData() {
-    const clientList = await clientsRef.child(`clients/${user.uid}/PixCreated/`).limitToLast(1).get();
-    console.log(clientList.val());
-    const dataClient = [];
-    const data = clientList.val();
-    for (let id in data) {
-      dataClient.push(id, data);
-    };
-    const resPix = Object.entries(clientList.val() ?? {}).map(([key, value]) => {
-      return {
-        'messenger': value.messenger,
-        'textId': value.textId,
-        'valorPix': value.valorPix
-      }
-    }
-    );
-    setMessenger(resPix[0].messenger);
-    setTextId(resPix[0].textId);
-    setValorPix(resPix[0].valorPix);
+    const clientList = await clientsRef.child(`clients/${user.uid}/PixCreated/${id}`).get();
+    const valorPix = clientList.val().valorPix;
+    const message = clientList.val().message;
+    const textId = clientList.val().textId;
+
+    setValorPix(valorPix);
+    setTextId(textId);
+    setMessage(message);
+
     // get chave do cliente
     const chaveRes = await chaveRef.child(`clients/${user.uid}/key/`).limitToLast(1).get();
     const dataChave = [];
@@ -70,15 +62,13 @@ export default function GenerationQRCode() {
   // gerar qrcode Payload
   const pix = new Pix(
     chave,
-    messenger.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, ''),
+    message.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, ''),
     name.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     city.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     textId.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, ''),
     valorPix
   );
   const payload = pix.getPayload();
-
-
   //logout incio 
   async function handleLogout() {
     setError("Algo deu errado")
@@ -99,19 +89,19 @@ export default function GenerationQRCode() {
   }
   return (
     <>
-      <Card className="text-light shadow text-center bg-secondary rounded mb-2">
-        <div className="pl-3 pr-3 row justify-content-between">
-          <Link className="badge badge-secondary" to="/UpData">EDITAR CHAVE</Link>
+      <Card className="text-light shadow text-center bg-secondary rounded mb-2 ">
+        <div className="pl-3 pr-3 row justify-content-between mt-2">
+          <Link className="badge badge-secondary" to="/UpData">
+            CHAVE</Link>
           <Link to="/GerarValor" className="badge badge-secondary" >
-            CRIAR NOVO PIX
-          </Link>
+            NOVO PIX </Link>
           <Button className="badge badge-secondary" variant="link" onClick={handleLogout}>
             SAIR
           </Button>
         </div>
         <Card.Body>
           <img src={logo} alt="Gera pix" width="200px" />
-        
+
           {error && <Alert variant="danger">{error}</Alert>}
           <Toast onClose={() => setShow(false)} show={show} delay={2500} autohide top-center className=" top-center text-white bg-success">
             <Toast.Header className="bg-success d-inline-block m-1">
@@ -138,9 +128,8 @@ export default function GenerationQRCode() {
         <div>
           <small>Valor: {valorPix}</small>
         </div>
-        <div>
-          <small>Mensagem: {messenger.replace(/\s/g, '')}</small>
-        </div>
+        
+    
         <Button className="bi bi-clipboard-check badge mr-08 Dark text-white" onClick={handToast}> COPIAR
         </Button>
       </Card.Footer>

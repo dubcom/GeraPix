@@ -34,7 +34,7 @@ function App() {
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/UpData" component={UpData} />
               <Route path="/GerarValor" component={GerarValor} />
-              <Route path="/QRCode:idKey" component={GenerationQRCode} />
+              <Route path="/QRCode/:idKey" component={GenerationQRCode} />
             </Switch>
           </AuthProvider>
         </Router>
