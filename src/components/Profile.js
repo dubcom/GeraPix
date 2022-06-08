@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Card, Button, Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
-
-import "firebase/database";
 import firebase from 'firebase';
-
+import "firebase/database";
+import React, { useState } from "react";
+import { Alert, Button, Card } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import logo from '../image/logo.png';
+
+
 
 export default function Profile() {
   const [error, setError] = useState('');
@@ -31,7 +31,7 @@ export default function Profile() {
   const chaveRef = firebase.database().ref();
 
   async function GetData() {
-    const chaveRes = await chaveRef.child(`clients/${user?.uid}/key/`).get(user?.uid);
+    const chaveRes = await chaveRef.child(`clients/${user.uid}/key/`).get(user?.uid);
 
     const dataChave = [];
     const dataRes = chaveRes.val();

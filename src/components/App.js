@@ -1,23 +1,23 @@
 import React from "react"
-import Signup from "./Signup"
 import { Container } from "react-bootstrap"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { AuthProvider } from "../contexts/AuthContext"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import Creatkey from "./Creatkey"
-import UpData from "./UpdateData"
+import createKey from "./createKey"
+import ForgotPassword from "./ForgotPassword"
+import GerarValor from "./GeraValor"
 import Login from "./Login"
 import PrivateRoute from "./PrivateRoute"
-import ForgotPassword from "./ForgotPassword"
-import UpdateProfile from "./UpdateProfile"
 import Profile from "./Profile"
-import GerarValor from "./GeraValor"
 import GenerationQRCode from "./QRCode"
+import Signup from "./Signup"
+import UpData from "./UpdateData"
+import UpdateProfile from "./UpdateProfile"
 
 
 
 function App() {
   return (
-    
+
     <Container
       className="d-flex align-items-center justify-content-center "
       style={{ minHeight: "100vh" }} >
@@ -30,18 +30,18 @@ function App() {
               <PrivateRoute path="/update-profile" component={UpdateProfile} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
-              <Route path="/Creatkey" component={Creatkey} />
+              <Route path="/createKey" component={createKey} />
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/UpData" component={UpData} />
               <Route path="/GerarValor" component={GerarValor} />
-              <Route path="/QRCode" component={GenerationQRCode} />
+              <Route path="/QRCode/:idKey" component={GenerationQRCode} />
             </Switch>
           </AuthProvider>
         </Router>
-        
+
       </div>
     </Container>
-    
+
   )
 }
 
