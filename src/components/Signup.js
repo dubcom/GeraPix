@@ -1,23 +1,23 @@
-import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useAuth } from "../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
-
 import firebase from "firebase"
-
+import React, { useRef, useState } from "react"
+import { Alert, Button, Card, Form } from "react-bootstrap"
+import { Link, useHistory } from "react-router-dom"
+import { useAuth } from "../contexts/AuthContext"
+import googleIconImg from '../image/google-icon.svg'
 import logo from '../image/logo.png'
-import googleIconImg from '../image/google-icon.svg';
+
+
 
 
 export default function Signup() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const {signup} = useAuth()
+  const { signup } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
- 
+
 
 
   async function handleSubmit(e) {
@@ -38,52 +38,52 @@ export default function Signup() {
 
     setLoading(false)
   }
-//Login google incio
-async function handLoginGoogle() {
-  
-  const provider = new firebase.auth.GoogleAuthProvider();
-  await firebase.auth().signInWithPopup(provider).then((result) => {
-  /** @type {firebase.auth.OAuthCredential} */
-  
-})
-try {
-  setError("")
-  setLoading(true)
-  
-} catch{
-  setError("Algo deu errado, tente novamente")
-  
-}
-history.push("/")
+  //Login google incio
+  async function handLoginGoogle() {
 
-// login google fim 
+    const provider = new firebase.auth.GoogleAuthProvider();
+    await firebase.auth().signInWithPopup(provider).then((result) => {
+      /** @type {firebase.auth.OAuthCredential} */
+
+    })
+    try {
+      setError("")
+      setLoading(true)
+
+    } catch {
+      setError("Algo deu errado, tente novamente")
+
+    }
+    history.push("/")
+
+    // login google fim 
   }
 
   return (
     <>
       <Card className="shadow p-3 mb-5 bg-dark text-white rounded p-3 mb-2">
         <Card.Body>
-    
-        <img src={logo}alt="Gera pix" width="200"/>
+
+          <img src={logo} alt="Gera pix" width="200" />
           <h3 className="text-center mb-4 font-weight-bold">CRIAR CONTA</h3>
           <p className="text-center">Cria sua conta, é grátis!</p>
-            <button onClick={handLoginGoogle}  className="w-100 mt-4 btn btn-primary btn-lg btn btn-danger" >
+          <button onClick={handLoginGoogle} className="w-100 mt-4 btn btn-primary btn-lg btn btn-danger" >
             <img className="pr-4" src={googleIconImg} alt="Logo do Google" />
-             Crie com o Google
+            Crie com o Google
           </button>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-4 mt-4"id="email">
+            <Form.Group className="mb-4 mt-4" id="email">
               <Form.Label className="mb-0">Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required placeholder="Digite seu email"/>
+              <Form.Control type="email" ref={emailRef} required placeholder="Digite seu email" />
             </Form.Group>
             <Form.Group className="mb-4" id="password">
               <Form.Label className="mb-0">Senha</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required placeholder="Digite sua senha"/>
+              <Form.Control type="password" ref={passwordRef} required placeholder="Digite sua senha" />
             </Form.Group>
             <Form.Group className="mb-4" id="password-confirm">
               <Form.Label className="mb-0">Confirme sua senha.</Form.Label>
-              <Form.Control className="mb-4"type="password" ref={passwordConfirmRef} required placeholder="Confirme sua senha"/>
+              <Form.Control className="mb-4" type="password" ref={passwordConfirmRef} required placeholder="Confirme sua senha" />
             </Form.Group>
             <Button disabled={loading} className="w-100 mt-4" type="submit">
               CRIAR CONTA

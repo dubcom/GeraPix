@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useAuth } from "../contexts/AuthContext"
+import { Alert, Button, Card, Form } from "react-bootstrap"
 import { Link, useHistory } from "react-router-dom"
-
+import { useAuth } from "../contexts/AuthContext"
 import logo from '../image/logo.png'
+
 
 export default function UpdateProfile() {
   const emailRef = useRef()
@@ -63,9 +63,9 @@ export default function UpdateProfile() {
         </div>
         <Card.Body className="text-light">
           <div className="text-center">
-            <img src={logo} alt="Gera pix"  width="200"/> 
+            <img src={logo} alt="Gera pix" width="200" />
           </div>
-        
+
           <h5 className="text-center mt-4">Atualizar dados</h5>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
@@ -107,7 +107,7 @@ export default function UpdateProfile() {
           <Link to="/">Cancelar</Link>
         </div>
       </Card>
-      
+
     </>
   )
 }

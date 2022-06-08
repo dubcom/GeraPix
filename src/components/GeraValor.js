@@ -1,12 +1,12 @@
-import React, { useState } from "react"
-import { Form, Card, Button, Alert } from "react-bootstrap"
-import { useAuth } from "../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
-
+import firebase from 'firebase';
+import 'firebase/database';
+import React, { useState } from "react";
+import { Alert, Button, Card, Form } from "react-bootstrap";
 import CurrencyInput from "react-currency-input-field";
-import firebase from 'firebase'
-import 'firebase/database'
-import logo from '../image/logo.png'
+import { Link, useHistory } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import logo from '../image/logo.png';
+
 
 export default function GerarValor() {
   const [error, setError] = useState("");
@@ -20,7 +20,6 @@ export default function GerarValor() {
     const { value = "" } = e.target;
     const parsedValue = value.replace(/[^\d.]/gi, "");
     setPix(parsedValue);
-    console.log(value);
   };
   const handleOnBlur = () => setPix(Number(newPix).toFixed(2));
   //logout incio 
@@ -46,10 +45,12 @@ export default function GerarValor() {
       menseger: newMenseger,
       date: new Date().toLocaleString().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
     };
-    await firebase.database().ref(`clients/${user?.uid}/PixCreated/`).push(firebaseClient);
-    history.push("/QRCode")
+   const created =  await firebase.database().ref(`clients/${user?.uid}/PixCreated/`).push(firebaseClient);
+   console.log(created.key);
+   
+    history.push("/QRCode");
   };
-  // fim do criar pix database
+ 
   return (
     <>
       <Card className="text-white  shadow  bg-secondary rounded mb-2">

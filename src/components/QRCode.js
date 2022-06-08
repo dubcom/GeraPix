@@ -8,10 +8,6 @@ import { useAuth } from "../contexts/AuthContext";
 import logo from '../image/logo.png';
 import Pix from "./Pix";
 
-
-
-
-
 const QRCode = require('qrcode.react');
 
 export default function GenerationQRCode() {
@@ -22,7 +18,7 @@ export default function GenerationQRCode() {
   const [name, setName] = useState('');
   const [valorPix, setValorPix] = useState('');
   const [textId, setTextId] = useState('');
-  const [menseger, setMenseger] = useState('');
+  const [messenger, setMessenger] = useState('');
   const [show, setShow] = useState(false);
 
   const { logout } = useAuth();
@@ -34,6 +30,7 @@ export default function GenerationQRCode() {
   const chaveRef = firebase.database().ref();
   async function GetData() {
     const clientList = await clientsRef.child(`clients/${user.uid}/PixCreated/`).limitToLast(1).get();
+    console.log(clientList.val());
     const dataClient = [];
     const data = clientList.val();
     for (let id in data) {
@@ -41,13 +38,13 @@ export default function GenerationQRCode() {
     };
     const resPix = Object.entries(clientList.val() ?? {}).map(([key, value]) => {
       return {
-        'menseger': value.menseger,
+        'messenger': value.messenger,
         'textId': value.textId,
         'valorPix': value.valorPix
       }
     }
     );
-    setMenseger(resPix[0].menseger);
+    setMessenger(resPix[0].messenger);
     setTextId(resPix[0].textId);
     setValorPix(resPix[0].valorPix);
     // get chave do cliente
@@ -73,7 +70,7 @@ export default function GenerationQRCode() {
   // gerar qrcode Payload
   const pix = new Pix(
     chave,
-    menseger.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, ''),
+    messenger.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, ''),
     name.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     city.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
     textId.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, ''),
@@ -142,7 +139,7 @@ export default function GenerationQRCode() {
           <small>Valor: {valorPix}</small>
         </div>
         <div>
-          <small>Mensagem: {menseger.replace(/\s/g, '')}</small>
+          <small>Mensagem: {messenger.replace(/\s/g, '')}</small>
         </div>
         <Button className="bi bi-clipboard-check badge mr-08 Dark text-white" onClick={handToast}> COPIAR
         </Button>
