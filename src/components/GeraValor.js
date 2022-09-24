@@ -2,7 +2,6 @@ import firebase from 'firebase';
 import 'firebase/database';
 import React, { useState } from "react";
 import { Alert, Button, Card, Form } from "react-bootstrap";
-import CurrencyInput from "react-currency-input-field";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import logo from '../image/logo.png';
@@ -15,12 +14,12 @@ export default function GerarValor() {
   const [newPix, setPix] = useState();
   const [newTextId, setTextId] = useState('Gerapix');
   const [newMessage, setMessage] = useState('Gerapix');
-  const handleChange = (e) => {
-    e.preventDefault();
-    const { value = "" } = e.target;
-    const parsedValue = value.replace(/[^\d.]/gi, "");
-    setPix(parsedValue);
-  };
+  // const handleChange = (e) => {
+  //   e.preventDefault();
+  //   const { value = "" } = e.target;
+  //   // const parsedValue = value.replace(/[^\d.]/gi, "");
+  //   setPix(value);
+  // };
   const handleOnBlur = () => setPix(Number(newPix).toFixed(2));
   //logout incio 
   async function handleLogout() {
@@ -35,7 +34,7 @@ export default function GerarValor() {
   }
   //Criar pix realtime 
   const user = firebase.auth().currentUser;
-  async function handCreatPix(event) {
+  async function handCreatePix(event) {
     event.preventDefault()
 
     const firebaseClient = {
@@ -46,13 +45,13 @@ export default function GerarValor() {
       // date utc create 
       date: new Date().toUTCString()
     };
-   const created =  await firebase.database().ref(`clients/${user?.uid}/PixCreated/`).push(firebaseClient);
-   console.log(created.key);
-   
-   
+    const created = await firebase.database().ref(`clients/${user?.uid}/PixCreated/`).push(firebaseClient);
+    console.log(created.key);
+
+
     history.push("/QRCode/" + created.key);
   };
- 
+
   return (
     <>
       <Card className="text-white  shadow  bg-secondary rounded mb-2">
@@ -73,21 +72,9 @@ export default function GerarValor() {
           <Form>
             <Form.Group className="mb-4" id="chave">
               <Form.Label className="mb-0"><h4>Valor da conta</h4></Form.Label>
-              <small className="form-text text-muted">R${newPix} Digite o valor do PIX </small>
-              <CurrencyInput
-                className="form-control"
-                data-number-to-fixed="2"
-                data-number-stepfactor="100"
-                name="newPix"
-                id="newPix"
-                value={newPix}
-                disableAbbreviations
-                allowDecimals
-                decimalsLimit="2"
-                fixedDecimalLength="2"
-                onChange={handleChange}
-                onBlur={handleOnBlur}
-                placeholder="R$ 0.00" />
+              <small className="form-text text-right text-muted">R${newPix} Valor do PIX </small>
+              <Form.Control type="number" name="newPix" required placeholder="R$
+               00.00" onChange={(event) => setPix(event.target.value)} onBlur={handleOnBlur} />
 
               <small className="form-text text-right text-muted">Digite mensagem para o cliente </small>
               <Form.Control type="text" name="newTextId" required placeholder="Digite um Identificador da venda"
@@ -96,7 +83,7 @@ export default function GerarValor() {
               <Form.Control type="text" name="newMessage" required placeholder="Mensagem para o cliente"
                 onChange={(event) => setMessage(event.target.value)} />
             </Form.Group>
-            <Button onClick={handCreatPix} className="w-100" type="submit">
+            <Button onClick={handCreatePix} className="w-100" type="submit">
               CRIAR QR-CODE
             </Button>
           </Form>
