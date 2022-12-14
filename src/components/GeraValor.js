@@ -14,12 +14,7 @@ export default function GerarValor() {
   const [newPix, setPix] = useState();
   const [newTextId, setTextId] = useState('Gerapix');
   const [newMessage, setMessage] = useState('Gerapix');
-  // const handleChange = (e) => {
-  //   e.preventDefault();
-  //   const { value = "" } = e.target;
-  //   // const parsedValue = value.replace(/[^\d.]/gi, "");
-  //   setPix(value);
-  // };
+ 
   const handleOnBlur = () => setPix(Number(newPix).toFixed(2));
   //logout incio 
   async function handleLogout() {
@@ -73,8 +68,23 @@ export default function GerarValor() {
             <Form.Group className="mb-4" id="chave">
               <Form.Label className="mb-0"><h4>Valor da conta</h4></Form.Label>
               <small className="form-text text-right text-muted">R${newPix} Valor do PIX </small>
-              <Form.Control type="number" name="newPix" required placeholder="R$
-               00.00" onChange={(event) => setPix(event.target.value)} onBlur={handleOnBlur} />
+              <small className="form-text text-muted">R${newPix} Digite o valor do PIX </small>
+              <CurrencyInput
+                className="form-control"
+                data-number-to-fixed="2"
+                data-number-stepfactor="100"
+                name="newPix"
+                id="newPix"
+                value={newPix}
+                disableAbbreviations
+                allowDecimals
+                decimalSeparator=","
+                thousandsSeparator="."
+                decimalsLimit="2"
+                fixedDecimalLength="2"
+                onChange={handleChange}
+                onBlur={handleOnBlur}
+                placeholder="R$ 0.00" />
 
               <small className="form-text text-right text-muted">Digite mensagem para o cliente </small>
               <Form.Control type="text" name="newTextId" required placeholder="Digite um Identificador da venda"
