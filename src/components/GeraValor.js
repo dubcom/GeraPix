@@ -74,6 +74,7 @@ export default function GerarValor() {
             <Form.Group className="mb-4" id="chave">
               <Form.Label className="mb-0"><h4>Valor da conta</h4></Form.Label>
               <small className="form-text text-muted">R${newPix} Digite o valor do PIX </small>
+              
               <CurrencyInput
                 className="form-control"
                 data-number-to-fixed="2"
@@ -83,6 +84,8 @@ export default function GerarValor() {
                 value={newPix}
                 disableAbbreviations
                 allowDecimals
+                decimalSeparator=","
+                thousandsSeparator="."
                 decimalsLimit="2"
                 fixedDecimalLength="2"
                 onChange={handleChange}
