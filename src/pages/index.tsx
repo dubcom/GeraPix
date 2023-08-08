@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Header from '@/components/header'
-import Link from 'next/link'
 import Footer from '@/components/footer'
 
 
@@ -9,25 +8,24 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <>
+    <div className='min-h-screen flex-col'>
     <header> <Header /> </header>
-      <main
-        className={`flex flex-col container items-center p-12 ${inter.className}`}
-      >
-        
-
-        <div className="flex flex-col items-center justify-center p-8">
+      <main>
+        <div  className={`justify-center container mx-auto lg:max-w-7xl md:items-center pb-12 md:flex md:px-2 p-2'>
+        ${inter.className}`}>
+        <div className="flex flex-col items-center justify-center p-8"> 
           <Image
             src="/LogoDark.svg"
             alt="Logo Gera PIX"
             width={160}
             height={80}
           />
-        </div>
         <h3 className="text-2xl font-bold text-center"> Entre agora</h3>
         <div className="text-sl text-center pt-4">
           <p> Faça seu login e cria sua conta PIX.</p> <p>Simples rápido e fácil.</p><p>Caso não tenha conta basta  criar uma. </p>
         </div>
+        </div>
+      
 
         <form className="flex flex-col items-center justify-center pt-8">
           <input
@@ -58,11 +56,9 @@ export default function Home() {
             COM GOOGLE
           </button>
         </form>
-
+        </div>
       </main>
-      
       < Footer />
-
-    </>
+    </div>
   )
 }
