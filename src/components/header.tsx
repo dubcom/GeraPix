@@ -30,6 +30,15 @@ const Header: React.FC = () => {
                Sair
             </Link>
         </div>
+        <div>
+      <Image
+        src="https://lh3.googleusercontent.com/a-/AOh14GiWEUq2IdzuupMmqGKLCNOvNW_TLMlG7_rb50CWqug=s96-c"
+        alt="Minha Imagem"
+        width={40}
+        height={40}
+        className="rounded-full"
+      />
+    </div>
     </header>
   );
 };
