@@ -5,7 +5,7 @@ import Link from 'next/link';
 const Header: React.FC = () => {
   return (
     <header className="flex container mx-auto lg:max-w-7xl md:items-center pb-12 justify-between md:flex md:px-2 p-2">
-      <div className="text-white font-semibold px-4">
+      <div className="text-white text-xs px-4">
             <Link href="/">
             <Image
             src="/LogoDark.svg"
@@ -15,17 +15,17 @@ const Header: React.FC = () => {
           />
             </Link>
         </div>
-        <div className="text-white font-semibold px-4">
+        <div className="text-white text-xs px-4">
             <Link href="/">
                Home
             </Link>
         </div>
-        <div className="text-white font-semibold px-4">
+        <div className="text-white text-xs px-4">
             <Link href="/">
                Gerar QR-Code
             </Link>
         </div>
-        <div className="text-white font-semibold px-4">
+        <div className="text-white text-xs px-4">
             <Link href="/">
                Sair
             </Link>
