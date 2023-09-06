@@ -13,14 +13,14 @@ export default function SignIn() {
       <main>
         <div  className={`justify-center container mx-auto lg:max-w-7xl md:items-center pb-12 md:flex md:px-2 p-2'>
         ${inter.className}`}>
-        <div className="flex flex-col items-center justify-center p-8"> 
+        <div className="flex flex-col items-center justify-center m-8"> 
           <Image
             src="/LogoDark.svg"
             alt="Logo Gera PIX"
             width={160}
             height={80}
           />
-        <h3 className="text-2xl font-bold text-center"> Entre agora</h3>
+        <h3 className="text-2xl font-bold pt-4 text-center"> Entre agora</h3>
         <div className="text-sl text-center p-4">
           <p> Faça seu login e cria sua conta PIX.</p> <p>Simples rápido e fácil.</p><p>Caso não tenha conta basta  criar uma. </p>
         </div>

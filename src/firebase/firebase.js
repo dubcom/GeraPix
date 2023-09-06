@@ -13,8 +13,9 @@ const app = firebase.initializeApp({
 })
 
 
-// const database = firebase.database()
-// const auth = app.auth()
-export default app 
+const database = firebase.database()
+const auth = app.auth()
+// export default app 
 
-// export { firebase, auth, database }
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { firebase, auth, database }

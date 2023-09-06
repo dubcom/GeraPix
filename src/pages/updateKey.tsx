@@ -31,9 +31,9 @@ export default function UpdateKey() {
           </div>
           <form>
             <div className="flex flex-col items-center justify-center p-8">
-              <InputField label="Chave PIX" placeholder={'Chave PIX valida'} type={'text'} name={'keyPix'} />
-              <InputField label="Nome do Beneficiário" placeholder={'Nome do beneficiário'} type={'text'} name={'name'} />
-              <InputField label="Cidade" placeholder={'Cidade valida'} type={'text'} name={'city'} />
+              <InputField label="Chave PIX" placeholder={'Chave PIX valida'} type={'text'} name={'keyPix'} onChange={''} />
+              <InputField label="Nome do Beneficiário" placeholder={'Nome do beneficiário'} type={'text'} name={'name'} onChange={''} />
+              <InputField label="Cidade" placeholder={'Cidade valida'} type={'text'} name={'city'} onChange={''} />
               <div className='mt-4 min-w-full'>
               </div>
               <button className="bg-green-500 hover:bg-green-700 uppercase justify-center  text-white font-bold py-2 px-8 rounded-lg">
