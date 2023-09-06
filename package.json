@@ -15,11 +15,17 @@
     "autoprefixer": "10.4.14",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.13",
+    "firebase": "^10.3.1",
+    "firebaseui": "^6.1.0",
     "next": "^13.4.13",
+    "node_env": "^0.0.3",
     "postcss": "8.4.27",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1"
   }
 }

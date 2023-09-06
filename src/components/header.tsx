@@ -1,8 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { auth  } from '@/firebase/firebase';
 
 const Header: React.FC = () => {
+
+  function logOut() {
+    return auth.signOut()
+  }
+
   return (
     <header className="flex container mx-auto lg:max-w-7xl md:items-center pb-12 justify-between md:flex md:px-2 p-2">
       <div className="text-white text-xs px-4">
@@ -26,9 +32,9 @@ const Header: React.FC = () => {
             </Link>
         </div>
         <div className="text-white text-xs px-4">
-            <Link href="/">
+            <button onClick={logOut}>
                Sair
-            </Link>
+            </button>
         </div>
         <div>
       <Image
