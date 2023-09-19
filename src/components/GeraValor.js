@@ -11,18 +11,24 @@ export default function GerarValor() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
-  const [newPix, setPix] = useState();
+  const [newPix, setPix] = useState("");
   const [newTextId, setTextId] = useState("Gerapix");
   const [newMessage, setMessage] = useState("Gerapix");
+
   const handleChange = (e) => {
     if (e && e.target) {
-    const { value = "" } = e.target;
-    const parsedValue = value.replace(/[^\d.]/gi, "");
-    setPix(parsedValue);
+      const { value = "" } = e.target;
+      const parsedValue = value.replace(/[^\d.]/gi, "");
+      setPix(parsedValue);
     }
-    };
-  const handleOnBlur = () => setPix(Number(newPix).toFixed(2));
-  //logout incio
+  };
+
+  const handleOnBlur = () => {
+    if (typeof newPix === 'string' && newPix !== '') {
+      setPix(Number(newPix).toFixed(2));
+    }
+  };
+
   async function handleLogout() {
     setError("");
 
@@ -30,10 +36,10 @@ export default function GerarValor() {
       await logout();
       history.push("/");
     } catch {
-      setError("Falha para fazer logout");
+      setError("Falha ao fazer logout");
     }
   }
-  //Criar pix realtime
+
   const user = firebase.auth().currentUser;
   async function handCreatPix(event) {
     event.preventDefault();
@@ -43,21 +49,21 @@ export default function GerarValor() {
       authorId: currentUser.uid,
       textId: newTextId,
       message: newMessage,
-      // date utc create
       date: new Date().toUTCString(),
     };
+
     const created = await firebase
       .database()
       .ref(`clients/${user?.uid}/PixCreated/`)
       .push(firebaseClient);
-    console.log(created.key);
 
+    console.log(created.key);
     history.push("/QRCode/" + created.key);
   }
 
   return (
     <>
-      <Card className="text-white  shadow  bg-secondary rounded mb-2">
+      <Card className="text-white shadow bg-secondary rounded mb-2">
         <div className="w-100 text-right">
           <Button
             className="mr-03 badge badge-secondary"
@@ -82,14 +88,14 @@ export default function GerarValor() {
                 <h4>Valor da conta</h4>
               </Form.Label>
               <small className="form-text text-muted">
-                R${newPix} Digite o valor do PIX{" "}
+                R${newPix} Digite o valor do PIX
               </small>
 
               <CurrencyFormat
                 className="form-control"
                 name="newPix"
                 placeholder="R$ 0,00"
-                defaultValue={newPix}
+                value={newPix}
                 decimalScale={2}
                 fixedDecimalScale
                 prefix="R$"
@@ -98,7 +104,7 @@ export default function GerarValor() {
               />
 
               <small className="form-text text-right text-muted">
-                Digite mensagem para o cliente{" "}
+                Digite mensagem para o cliente
               </small>
               <Form.Control
                 type="text"
@@ -108,7 +114,7 @@ export default function GerarValor() {
                 onChange={(event) => setTextId(event.target.value)}
               />
               <small className="form-text text-right text-muted">
-                Digite um identificador da venda{" "}
+                Digite um identificador da venda
               </small>
               <Form.Control
                 type="text"
