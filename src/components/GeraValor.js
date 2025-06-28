@@ -15,17 +15,15 @@ export default function GerarValor() {
   const [newTextId, setTextId] = useState("Gerapix");
   const [newMessage, setMessage] = useState("Gerapix");
 
-  const handleChange = (e) => {
-    if (e && e.target) {
-      const { value = "" } = e.target;
-      const parsedValue = value.replace(/[^\d.]/gi, "");
-      setPix(parsedValue);
-    }
+  const handleChange = (values) => {
+    const { value } = values;
+    setPix(value);
   };
 
   const handleOnBlur = () => {
-    if (typeof newPix === 'string' && newPix !== '') {
-      setPix(Number(newPix).toFixed(2));
+    if (newPix) {
+      const formattedValue = parseFloat(newPix.replace(',', '.')).toFixed(2);
+      setPix(formattedValue);
     }
   };
 
@@ -96,9 +94,11 @@ export default function GerarValor() {
                 name="newPix"
                 placeholder="R$ 0,00"
                 value={newPix}
+                thousandSeparator="."
+                decimalSeparator=","
                 decimalScale={2}
                 fixedDecimalScale
-                prefix="R$"
+                prefix="R$ "
                 onValueChange={handleChange}
                 onBlur={handleOnBlur}
               />
