@@ -11,21 +11,40 @@ export default function GerarValor() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
-  const [newPix, setPix] = useState("");
+  const [newPix, setPix] = useState(""); // Stores the raw numeric string for the database
+  const [displayValue, setDisplayValue] = useState(""); // Stores the formatted string for display
   const [newTextId, setTextId] = useState("Gerapix");
   const [newMessage, setMessage] = useState("Gerapix");
 
   const handleChange = (values) => {
-    const { value } = values;
-    setPix(value);
+    const {value, floatValue} = values;
+    // value is the formatted string, floatValue is the number
+    setDisplayValue(value || ""); // Update display with formatted value
+    if (floatValue !== undefined) {
+      setPix(floatValue.toString()); // Store the unformatted number string for database
+    } else {
+      setPix(""); // Handle empty or invalid input
+    }
   };
 
   const handleOnBlur = () => {
+    // When blurring, if there's a valid number in newPix,
+    // format it to two decimal places for display.
+    // The actual newPix value for the database is already set by handleChange.
     if (newPix) {
-      const formattedValue = parseFloat(newPix.replace(',', '.')).toFixed(2);
-      setPix(formattedValue);
+      const numericValue = parseFloat(newPix);
+      if (!isNaN(numericValue)) {
+        // Format with comma for decimal, as per Brazilian convention for display
+        const formattedForDisplay = numericValue.toFixed(2).replace('.', ',');
+        setDisplayValue(`R$ ${formattedForDisplay}`);
+      } else {
+        setDisplayValue(""); // Clear display if not a valid number
+      }
+    } else {
+        setDisplayValue(""); // Clear display if newPix is empty
     }
   };
+
 
   async function handleLogout() {
     setError("");
@@ -42,8 +61,11 @@ export default function GerarValor() {
   async function handCreatPix(event) {
     event.preventDefault();
 
+    // Ensure newPix is a string with a period as decimal separator for Firebase
+    const valueForFirebase = parseFloat(newPix).toFixed(2);
+
     const firebaseClient = {
-      valorPix: newPix,
+      valorPix: valueForFirebase, // Use the processed newPix
       authorId: currentUser.uid,
       textId: newTextId,
       message: newMessage,
@@ -86,21 +108,23 @@ export default function GerarValor() {
                 <h4>Valor da conta</h4>
               </Form.Label>
               <small className="form-text text-muted">
-                R${newPix} Digite o valor do PIX
+                {/* Consider if this helper text is still needed or how it should display */}
+                {/* R${newPix} Digite o valor do PIX */}
+                Digite o valor do PIX
               </small>
 
               <CurrencyFormat
                 className="form-control"
-                name="newPix"
+                name="pixValue" // Changed name for clarity, though not strictly necessary
                 placeholder="R$ 0,00"
-                value={newPix}
+                value={displayValue} // Use displayValue for the input field
                 thousandSeparator="."
                 decimalSeparator=","
                 decimalScale={2}
-                fixedDecimalScale
+                fixedDecimalScale={true} // explicitly true
                 prefix="R$ "
-                onValueChange={handleChange}
-                onBlur={handleOnBlur}
+                onValueChange={handleChange} // handleChange now manages both newPix and displayValue
+                onBlur={handleOnBlur} // onBlur now primarily updates displayValue
               />
 
               <small className="form-text text-right text-muted">
